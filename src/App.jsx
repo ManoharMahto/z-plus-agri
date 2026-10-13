@@ -37,9 +37,6 @@ export default function App() {
         
         {/* Top Navigation */}
         <Navbar />
-        
-        {/* Horizontal Category Strip */}
-        <CategoryBar />
 
         {/* Main Content Area */}
         <main className="flex-1">

@@ -95,8 +95,8 @@ export default function ProductDetailPage() {
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
-          { label: 'Products', path: '/products' },
-          { label: product.category, path: `/products?category=${product.category.toLowerCase().replace(/ /g, '-')}` },
+          { label: 'All Seeds', path: '/products' },
+          { label: 'Vegetable Seeds', path: '/products' },
           { label: product.name }
         ]}
       />
@@ -408,47 +408,34 @@ export default function ProductDetailPage() {
 
             {activeTab === 'reviews' && (
               <div className="space-y-6 max-w-3xl">
-                <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                   <div className="text-center pr-4 border-r border-gray-200">
-                    <div className="text-3xl font-black text-gray-900">{product.rating}</div>
-                    <StarRating rating={product.rating} size="sm" />
-                    <span className="text-[11px] text-gray-500 mt-1 block">Verified Farmers</span>
+                    <div className="text-3xl font-black text-gray-900">{product.rating || '4.8'}</div>
+                    <StarRating rating={product.rating || 4.8} size="sm" />
+                    <span className="text-[11px] text-gray-500 mt-1 block">Z+ Agri Quality</span>
                   </div>
                   <div className="text-xs text-gray-600 space-y-1">
-                    <p className="font-semibold text-gray-800">96% of farmers recommend this seed variety</p>
-                    <p>High germination rate, uniform seedlings, and top market rate at regional Mandis.</p>
+                    <p className="font-bold text-gray-800">100% Genuine Certified Seeds</p>
+                    <p>High germination rate, tested moisture packaging, directly from our company depot.</p>
                   </div>
                 </div>
 
-                {/* Sample Verified Reviews */}
-                <div className="space-y-4">
-                  <div className="border-b border-gray-100 pb-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="bg-green-700 text-white text-[11px] font-bold px-1.5 py-0.2 rounded">5 ★</span>
-                      <h5 className="font-bold text-sm text-gray-900">Superb germination, above 90% in 5 days!</h5>
-                    </div>
-                    <p className="text-xs text-gray-600">
-                      Sowed in Kharif season across 3 acres. Strong branching and zero viral leaf curl attack. Packed freshly with proper batch number.
-                    </p>
-                    <div className="flex items-center gap-2 text-[11px] text-gray-400 mt-1.5">
-                      <span className="font-medium text-gray-700">Balvinder Singh (Ludhiana, Punjab)</span>
-                      <span>• Certified Buyer • 2 weeks ago</span>
-                    </div>
+                <div className="p-6 bg-white border border-gray-200 rounded-xl text-center space-y-3">
+                  <div className="w-12 h-12 bg-green-50 text-green-700 rounded-full flex items-center justify-center mx-auto">
+                    <Star className="w-6 h-6" />
                   </div>
-
-                  <div className="border-b border-gray-100 pb-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="bg-green-700 text-white text-[11px] font-bold px-1.5 py-0.2 rounded">5 ★</span>
-                      <h5 className="font-bold text-sm text-gray-900">Original brand seeds at best price</h5>
-                    </div>
-                    <p className="text-xs text-gray-600">
-                      Local mandi was asking ₹150 more per packet. Delivered directly to our village post office without any hassle.
-                    </p>
-                    <div className="flex items-center gap-2 text-[11px] text-gray-400 mt-1.5">
-                      <span className="font-medium text-gray-700">Dhananjay Patil (Nashik, Maharashtra)</span>
-                      <span>• Certified Buyer • 1 month ago</span>
-                    </div>
-                  </div>
+                  <h4 className="font-bold text-gray-800 text-sm">Abhi tak koi user review nahi hai</h4>
+                  <p className="text-xs text-gray-500 max-w-md mx-auto">
+                    Aapne yeh beej bo-kar fasal ugayi hai? Apna anubhav WhatsApp (9508365119) par share karein aur agle order par special discount paayein!
+                  </p>
+                  <a
+                    href={`https://wa.me/919508365119?text=Namaste%20Z%2B%20Agri!%20Maine%20${encodeURIComponent(product.name)}%20use%20kiya%20hai%20aur%20apna%20review%20share%20karna%20chahta%20hoon.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition"
+                  >
+                    WhatsApp par Review Share Karein 💬
+                  </a>
                 </div>
               </div>
             )}

@@ -231,44 +231,9 @@ export default function Navbar() {
           <Link
             to="/products"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-white font-medium hover:text-agriYellow-400"
+            className="block py-2 text-white font-bold hover:text-agriYellow-400"
           >
-            🌱 All Seed Products
-          </Link>
-          <Link
-            to="/products?category=vegetable-seeds"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-green-100 hover:text-white"
-          >
-            🥦 Vegetable Seeds
-          </Link>
-          <Link
-            to="/products?category=cereal-seeds"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-green-100 hover:text-white"
-          >
-            🌾 Cereal Seeds (Paddy, Wheat, Maize)
-          </Link>
-          <Link
-            to="/products?category=oil-seeds"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-green-100 hover:text-white"
-          >
-            🌻 Oil Seeds (Mustard, Groundnut)
-          </Link>
-          <Link
-            to="/products?category=spice-seeds"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-green-100 hover:text-white"
-          >
-            🌶️ Spice Seeds (Jeera, Dhaniya)
-          </Link>
-          <Link
-            to="/products?category=hybrid-seeds"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-green-100 hover:text-white"
-          >
-            🧬 Hybrid & BT Seeds
+            🥦 All Vegetable Seeds Catalog
           </Link>
 
           <div className="pt-2 border-t border-green-700 flex flex-col gap-2">

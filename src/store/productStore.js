@@ -10,15 +10,21 @@ export const useProductStore = create(
       addProduct: (product) => {
         const current = get().products;
         const newId = current.length ? Math.max(...current.map((p) => p.id || 0)) + 1 : 1;
+        const imagesList = Array.isArray(product.images) && product.images.length > 0
+          ? product.images.filter(Boolean)
+          : [product.image || `https://picsum.photos/seed/seed-${newId}/400/300`];
+
         const newProduct = {
           ...product,
           id: newId,
-          rating: product.rating || 4.5,
+          brand: 'Z+ Agri',
+          category: 'Vegetable Seeds',
+          rating: product.rating || 4.8,
           reviewCount: product.reviewCount || 1,
           inStock: product.inStock !== false,
-          image: product.image || `https://picsum.photos/seed/seed-${newId}/400/300`,
-          images: product.images || [product.image || `https://picsum.photos/seed/seed-${newId}/400/300`],
-          quantityOptions: product.quantityOptions || ['100g', '500g', '1kg']
+          image: imagesList[0],
+          images: imagesList,
+          quantityOptions: product.quantityOptions || ['100g', '250g', '500g', '1kg']
         };
         set({ products: [newProduct, ...current] });
         return newProduct;
@@ -26,9 +32,21 @@ export const useProductStore = create(
 
       updateProduct: (id, updatedFields) => {
         set((state) => ({
-          products: state.products.map((p) =>
-            p.id === Number(id) ? { ...p, ...updatedFields } : p
-          )
+          products: state.products.map((p) => {
+            if (p.id !== Number(id)) return p;
+            const imagesList = Array.isArray(updatedFields.images) && updatedFields.images.length > 0
+              ? updatedFields.images.filter(Boolean)
+              : [updatedFields.image || p.image];
+
+            return {
+              ...p,
+              ...updatedFields,
+              brand: 'Z+ Agri',
+              category: 'Vegetable Seeds',
+              image: imagesList[0] || p.image,
+              images: imagesList
+            };
+          })
         }));
       },
 
@@ -43,7 +61,7 @@ export const useProductStore = create(
       }
     }),
     {
-      name: 'zplus_products_storage'
+      name: 'zplus_products_storage_v4'
     }
   )
 );
