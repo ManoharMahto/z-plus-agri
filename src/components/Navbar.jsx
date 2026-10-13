@@ -29,6 +29,9 @@ export default function Navbar() {
   const wishlistItems = useWishlistStore((state) => state.items);
   const { user, isAuthenticated, logout } = useAuthStore();
 
+  // Admin authorization check - Only for authorized numbers 9508365119 & 9508901585
+  const isAdmin = user && (user.phone === '9508365119' || user.phone === '9508901585' || user.isAdmin);
+
   const handleLogout = () => {
     logout();
     setUserDropdownOpen(false);
@@ -38,20 +41,27 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 bg-green-600 text-white shadow-md">
       {/* Top micro bar for Indian Farmers */}
-      <div className="bg-green-700 text-xs py-1 px-4 border-b border-green-500/40 text-green-100 hidden sm:block">
+      <div className="bg-green-700 text-xs py-1.5 px-4 border-b border-green-500/40 text-green-100">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-yellow-300" /> 100% Certified High-Yield Seeds
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1 font-semibold text-yellow-300">
+              <ShieldCheck className="w-3.5 h-3.5" /> 100% Certified Seeds
             </span>
             <span className="hidden md:inline">|</span>
-            <span className="hidden md:inline">Free Delivery on Orders Over ₹500 across India</span>
+            <span className="hidden md:inline text-green-200">Delivery Pan India</span>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1 font-semibold text-yellow-300">
-              <PhoneCall className="w-3.5 h-3.5" /> Kisan Helpline: 1800-889-AGRI (Toll Free)
-            </span>
-            <span>Hindi / English</span>
+          <div className="flex items-center gap-3 sm:gap-5">
+            <a href="tel:9508901585" className="flex items-center gap-1 font-black text-yellow-300 hover:text-white transition">
+              <PhoneCall className="w-3.5 h-3.5" /> Call: 9508901585
+            </a>
+            <a
+              href="https://wa.me/919508365119"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 font-black text-emerald-200 hover:text-white transition"
+            >
+              💬 WhatsApp: 9508365119
+            </a>
           </div>
         </div>
       </div>
@@ -192,14 +202,16 @@ export default function Navbar() {
               <span className="hidden md:inline">Cart</span>
             </Link>
 
-            {/* Admin Dashboard Pill - Visible on both mobile and desktop */}
-            <Link
-              to="/admin"
-              className="inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-300 text-green-950 font-black text-xs px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-md transition shadow-sm active:scale-95 shrink-0"
-              title="Store Owner Dashboard"
-            >
-              <span>⚙️ Admin</span>
-            </Link>
+            {/* Admin Dashboard Pill - Only visible to authenticated Store Admins */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className="inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-300 text-green-950 font-black text-xs px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-md transition shadow-sm active:scale-95 shrink-0"
+                title="Store Owner Dashboard"
+              >
+                <span>⚙️ Admin</span>
+              </Link>
+            )}
           </div>
 
         </div>
@@ -260,13 +272,15 @@ export default function Navbar() {
           </Link>
 
           <div className="pt-2 border-t border-green-700 flex flex-col gap-2">
-            <Link
-              to="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 py-2 px-3 bg-yellow-400 text-green-950 font-black rounded-lg text-xs shadow-xs"
-            >
-              ⚙️ Admin Dashboard (Orders & Sales)
-            </Link>
+            {isAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 py-2 px-3 bg-yellow-400 text-green-950 font-black rounded-lg text-xs shadow-xs"
+              >
+                ⚙️ Admin Dashboard (Orders & Sales)
+              </Link>
+            )}
             <Link
               to="/wishlist"
               onClick={() => setMobileMenuOpen(false)}

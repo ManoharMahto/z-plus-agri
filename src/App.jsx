@@ -61,6 +61,21 @@ export default function App() {
         {/* Global Toast Notifications Container */}
         <ToastContainer />
 
+        {/* Floating WhatsApp Support Button */}
+        <a
+          href="https://wa.me/919508365119?text=Namaste%20Z%2B%20Agri!%20Mujhe%20beej%20ke%20bare%20me%20jankari%20chahiye."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-50 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 active:scale-95 border-2 border-white ring-4 ring-emerald-100 group"
+          title="WhatsApp Kisan Sahayata (9508365119)"
+          aria-label="WhatsApp Support"
+        >
+          <span className="text-2xl leading-none">💬</span>
+          <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-bold text-xs pl-0 group-hover:pl-2">
+            WhatsApp Order
+          </span>
+        </a>
+
         {/* Global Agricultural Footer */}
         <Footer />
         

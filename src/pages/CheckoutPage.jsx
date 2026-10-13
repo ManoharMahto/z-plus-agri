@@ -27,16 +27,16 @@ export default function CheckoutPage() {
 
   const [step, setStep] = useState(1);
 
-  // Address state
+  // Address state - Empty by default with light placeholders
   const [address, setAddress] = useState({
-    name: user?.name || "Rameshwar Patel",
-    phone: user?.phone || "9876543210",
-    pincode: user?.pincode || "452001",
-    addressLine: user?.address || "Plot 42, Kisan Seva Kendra, Near Mandi Gate",
-    city: user?.city || "Indore",
-    state: user?.state || "Madhya Pradesh",
-    landmark: "Behind Central Fertilizer Depot",
-    addressType: "Farm / Warehouse"
+    name: "",
+    phone: "",
+    pincode: "",
+    addressLine: "",
+    city: "",
+    state: "",
+    landmark: "",
+    addressType: "Farm / Home"
   });
 
   // Payment state
@@ -231,9 +231,10 @@ export default function CheckoutPage() {
                     <input
                       type="text"
                       required
+                      placeholder="Apna Pura Naam (e.g. Rameshwar Patel)"
                       value={address.name}
                       onChange={(e) => setAddress({ ...address, name: e.target.value })}
-                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none"
+                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -243,9 +244,10 @@ export default function CheckoutPage() {
                     <input
                       type="tel"
                       required
+                      placeholder="10-Digit Mobile No. (e.g. 9508365119)"
                       value={address.phone}
                       onChange={(e) => setAddress({ ...address, phone: e.target.value.replace(/\D/g, '') })}
-                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none"
+                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -259,9 +261,10 @@ export default function CheckoutPage() {
                       type="text"
                       required
                       maxLength={6}
+                      placeholder="6-Digit PIN (e.g. 835233)"
                       value={address.pincode}
                       onChange={(e) => setAddress({ ...address, pincode: e.target.value.replace(/\D/g, '') })}
-                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none font-mono"
+                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none font-mono"
                     />
                   </div>
                   <div>
@@ -271,9 +274,10 @@ export default function CheckoutPage() {
                     <input
                       type="text"
                       required
+                      placeholder="Zila / Tehsil / Mandi (e.g. Gumla)"
                       value={address.city}
                       onChange={(e) => setAddress({ ...address, city: e.target.value })}
-                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none"
+                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -283,9 +287,10 @@ export default function CheckoutPage() {
                     <input
                       type="text"
                       required
+                      placeholder="Rajya (e.g. Jharkhand)"
                       value={address.state}
                       onChange={(e) => setAddress({ ...address, state: e.target.value })}
-                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none"
+                      className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -297,9 +302,10 @@ export default function CheckoutPage() {
                   <textarea
                     rows={2}
                     required
+                    placeholder="Gaon ka Naam, Post Office, Makan ya Khet No. (e.g. Kulhi Shivpur Toli, Post Gumla)"
                     value={address.addressLine}
                     onChange={(e) => setAddress({ ...address, addressLine: e.target.value })}
-                    className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none"
+                    className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none"
                   />
                 </div>
 
@@ -309,9 +315,10 @@ export default function CheckoutPage() {
                   </label>
                   <input
                     type="text"
+                    placeholder="Pass ki Mandi, Mandir, School ya Depot (e.g. Near Shiv Mandir)"
                     value={address.landmark}
                     onChange={(e) => setAddress({ ...address, landmark: e.target.value })}
-                    className="w-full border border-gray-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-green-600 focus:outline-none"
+                    className="w-full border border-gray-300 rounded-md p-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-green-600 focus:outline-none"
                   />
                 </div>
 

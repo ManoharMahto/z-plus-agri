@@ -5,10 +5,11 @@ import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import Breadcrumb from '../components/Breadcrumb';
 import EmptyState from '../components/EmptyState';
-import { PRODUCTS } from '../data/products';
+import { useProductStore } from '../store/productStore';
 import { CATEGORIES } from '../data/categories';
 
 export default function ProductsPage() {
+  const products = useProductStore((state) => state.products);
   const [searchParams, setSearchParams] = useSearchParams();
 
   // URL state
@@ -62,7 +63,7 @@ export default function ProductsPage() {
 
   // Filter & Sort Logic
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // 1. Search filter
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -106,7 +107,7 @@ export default function ProductsPage() {
       // Default: featured (ID order or priority tags)
       return b.rating * b.reviewCount - a.rating * a.reviewCount;
     });
-  }, [searchQuery, selectedCategory, priceRange, minRating, selectedBrands, sortBy]);
+  }, [products, searchQuery, selectedCategory, priceRange, minRating, selectedBrands, sortBy]);
 
   // Pagination Logic
   const itemsPerPage = 8;

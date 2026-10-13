@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, ShoppingCart, Star, CheckCircle, Zap } from 'lucide-react';
+import { Heart, ShoppingCart, Star, CheckCircle, Zap, MessageCircle } from 'lucide-react';
 import { useCartStore } from '../store/cartStore';
 import { useWishlistStore } from '../store/wishlistStore';
 import { useToastStore } from '../store/toastStore';
@@ -140,14 +140,29 @@ export default function ProductCard({ product }) {
             )}
           </div>
 
-          <button
-            onClick={handleAddToCart}
-            className="bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-xs font-bold px-3 py-1.5 rounded flex items-center gap-1.5 transition-colors shadow-xs ml-auto"
-            aria-label={`Add ${product.name} to cart`}
-          >
-            <ShoppingCart className="w-3.5 h-3.5" />
-            <span>Add</span>
-          </button>
+          <div className="flex items-center gap-1.5 ml-auto">
+            <a
+              href={`https://wa.me/919508365119?text=${encodeURIComponent(
+                `Namaste Z+ Agri! Mujhe ye beej chahiye:\n🌾 ${product.name}\n💰 Daam: ₹${product.price}`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white p-1.5 rounded transition shadow-xs flex items-center justify-center"
+              title="Order on WhatsApp (9508365119)"
+              aria-label="Order on WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+            </a>
+
+            <button
+              onClick={handleAddToCart}
+              className="bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-xs font-bold px-2.5 py-1.5 rounded flex items-center gap-1 transition-colors shadow-xs"
+              aria-label={`Add ${product.name} to cart`}
+            >
+              <ShoppingCart className="w-3.5 h-3.5" />
+              <span>Add</span>
+            </button>
+          </div>
         </div>
 
       </div>

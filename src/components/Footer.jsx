@@ -172,20 +172,33 @@ export default function Footer() {
           {/* Col 4: Contact info */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-green-500 pl-2">
-              Contact & Mandi Office
+              Kisan Sahayata & Mandi Office
             </h4>
             <ul className="space-y-3 text-xs sm:text-sm text-gray-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
-                <span>Z+ Agri Tech Hub, Sector 18, Kisan Bhawan, New Delhi - 110001, India</span>
+                <span>Z+ Agri Seeds Depot, Kulhi Shivpur Toli, Gumla, Jharkhand - 835233</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-green-500 shrink-0" />
-                <span className="text-white font-semibold">1800-889-AGRI (Toll Free)</span>
+                <a href="tel:9508901585" className="text-yellow-300 font-bold hover:underline">
+                  Call: 9508901585 (Direct Call)
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="text-emerald-400 font-bold">💬</span>
+                <a
+                  href="https://wa.me/919508365119"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-300 font-bold hover:underline"
+                >
+                  WhatsApp: 9508365119
+                </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-green-500 shrink-0" />
-                <span>support@zplusagri.com</span>
+                <span>support@genzera.in</span>
               </li>
             </ul>
           </div>

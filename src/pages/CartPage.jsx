@@ -112,13 +112,28 @@ export default function CartPage() {
                 <span className="text-2xl font-black text-gray-900">₹{finalTotal}</span>
               </div>
 
-              <button
-                onClick={() => navigate('/checkout')}
-                className="w-full sm:w-auto bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-extrabold px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-              >
-                <span>PLACE ORDER</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+                  <a
+                    href={`https://wa.me/919508365119?text=${encodeURIComponent(
+                      `Namaste Z+ Agri! Mujhe ye cart items order karne hain:\n` +
+                      items.map((i, idx) => `${idx + 1}. ${i.product.name} (${i.selectedQtyOption || 'Pack'}) × ${i.quantity} = ₹${i.product.price * i.quantity}`).join('\n') +
+                      `\n\n💰 Kul Daam (Total): ₹${finalTotal}\nKripya delivery details batayein.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-black px-5 py-3 rounded-lg shadow-sm transition flex items-center justify-center gap-1.5 text-xs sm:text-sm active:scale-95"
+                  >
+                    <span>💬 WhatsApp Order (9508365119)</span>
+                  </a>
+
+                  <button
+                    onClick={() => navigate('/checkout')}
+                    className="w-full sm:w-auto bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-extrabold px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+                  >
+                    <span>PLACE ORDER</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
             </div>
           </div>
         </div>

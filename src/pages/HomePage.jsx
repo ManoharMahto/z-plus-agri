@@ -14,10 +14,11 @@ import {
 } from 'lucide-react';
 import HeroBanner from '../components/HeroBanner';
 import ProductCard from '../components/ProductCard';
-import { PRODUCTS } from '../data/products';
+import { useProductStore } from '../store/productStore';
 import { CATEGORIES } from '../data/categories';
 
 export default function HomePage() {
+  const PRODUCTS = useProductStore((state) => state.products);
   // Timer for "Deals of the Day"
   const [timeLeft, setTimeLeft] = useState({
     hours: 14,

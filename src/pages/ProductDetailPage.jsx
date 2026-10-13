@@ -14,12 +14,14 @@ import {
   Leaf,
   Sprout,
   Calendar,
-  AlertCircle
+  AlertCircle,
+  Phone,
+  MessageCircle
 } from 'lucide-react';
 import Breadcrumb from '../components/Breadcrumb';
 import ProductCard from '../components/ProductCard';
 import StarRating from '../components/StarRating';
-import { PRODUCTS } from '../data/products';
+import { useProductStore } from '../store/productStore';
 import { useCartStore } from '../store/cartStore';
 import { useWishlistStore } from '../store/wishlistStore';
 import { useToastStore } from '../store/toastStore';
@@ -27,6 +29,7 @@ import { useToastStore } from '../store/toastStore';
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const PRODUCTS = useProductStore((state) => state.products);
 
   const product = PRODUCTS.find((p) => p.id === Number(id)) || PRODUCTS[0];
   const relatedProducts = PRODUCTS.filter(
@@ -34,13 +37,13 @@ export default function ProductDetailPage() {
   ).slice(0, 4);
 
   // Gallery state
-  const [selectedImage, setSelectedImage] = useState(product.image);
+  const [selectedImage, setSelectedImage] = useState(product?.image);
   const [selectedQtyOption, setSelectedQtyOption] = useState(
-    product.quantityOptions?.[0] || '1 Unit'
+    product?.quantityOptions?.[0] || '1 Unit'
   );
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('specs');
-  const [pincode, setPincode] = useState('452001');
+  const [pincode, setPincode] = useState('');
   const [pincodeStatus, setPincodeStatus] = useState('Available for delivery by Thursday');
 
   const addToCart = useCartStore((state) => state.addToCart);
@@ -270,6 +273,29 @@ export default function ProductDetailPage() {
                   <Zap className="w-5 h-5 fill-current" />
                   <span>BUY NOW</span>
                 </button>
+              </div>
+
+              {/* Instant WhatsApp & Direct Phone Call Order Buttons for Farmers */}
+              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <a
+                  href={`https://wa.me/919508365119?text=${encodeURIComponent(
+                    `Namaste Z+ Agri! Mujhe ye beej chahiye:\n🌾 Beej ka Naam: ${product.name}\n📦 Packet Size: ${selectedQtyOption || 'Standard'}\n🔢 Quantity: ${quantity} packet\n💰 Daam: ₹${product.price * quantity}\n\nKripya mera order confirm karein aur delivery ki jankari dein.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2.5 px-3 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition active:scale-95"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>WhatsApp par Order (9508365119)</span>
+                </a>
+
+                <a
+                  href="tel:9508901585"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2.5 px-3 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition active:scale-95"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Call to Order: 9508901585</span>
+                </a>
               </div>
 
               {/* Delivery & Pincode Checker */}
