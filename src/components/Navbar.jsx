@@ -191,6 +191,15 @@ export default function Navbar() {
               </div>
               <span className="hidden md:inline">Cart</span>
             </Link>
+
+            {/* Admin Dashboard Pill */}
+            <Link
+              to="/admin"
+              className="hidden sm:inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-300 text-green-950 font-bold text-xs px-2.5 py-1.5 rounded-md transition shadow-xs"
+              title="Store Owner Dashboard"
+            >
+              <span>⚙️ Admin</span>
+            </Link>
           </div>
 
         </div>

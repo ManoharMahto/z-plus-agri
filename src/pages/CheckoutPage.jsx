@@ -17,6 +17,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import { useCartStore } from '../store/cartStore';
 import { useAuthStore } from '../store/authStore';
 import { useToastStore } from '../store/toastStore';
+import { api } from '../services/api';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ export default function CheckoutPage() {
     setStep(2);
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     const paymentLabel = 
       paymentMethod === 'cod' ? 'Cash on Delivery (Pay at village drop)' :
       paymentMethod === 'upi' ? `UPI Payment (${upiId})` :
@@ -104,7 +105,43 @@ export default function CheckoutPage() {
       }
     };
 
+    // Save to local store
     const newOrder = addOrder(orderData);
+
+    // Send to Backend API
+    try {
+      await api.createOrder({
+        customer: {
+          name: address.name,
+          phone: address.phone,
+          address: address.addressLine,
+          city: address.city,
+          state: address.state,
+          pincode: address.pincode
+        },
+        items: items.map((i) => ({
+          id: i.id,
+          name: i.product.name,
+          price: i.product.price,
+          quantity: i.quantity,
+          packSize: i.selectedQtyOption || 'Standard',
+          brand: i.product.brand || 'Z+ Agri'
+        })),
+        pricing: {
+          subtotal,
+          discount: totalDiscount,
+          deliveryCharge: deliveryFee,
+          total: finalTotal
+        },
+        payment: {
+          method: paymentMethod.toUpperCase(),
+          status: paymentMethod === 'cod' ? 'PENDING' : 'COMPLETED'
+        }
+      });
+    } catch (err) {
+      console.warn('Backend order recording notice:', err);
+    }
+
     clearCart();
     addToast("Order placed successfully! Bumper yield ahead!", "success");
     navigate(`/order-confirmation/${newOrder.id}`, { state: { order: newOrder } });
