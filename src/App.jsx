@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CategoryBar from './components/CategoryBar';
 import Footer from './components/Footer';
@@ -31,7 +31,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-gray-100 text-gray-800">
         
@@ -65,6 +65,6 @@ export default function App() {
         <Footer />
         
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

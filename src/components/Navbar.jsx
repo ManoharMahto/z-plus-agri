@@ -192,10 +192,10 @@ export default function Navbar() {
               <span className="hidden md:inline">Cart</span>
             </Link>
 
-            {/* Admin Dashboard Pill */}
+            {/* Admin Dashboard Pill - Visible on both mobile and desktop */}
             <Link
               to="/admin"
-              className="hidden sm:inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-300 text-green-950 font-bold text-xs px-2.5 py-1.5 rounded-md transition shadow-xs"
+              className="inline-flex items-center gap-1 bg-yellow-400 hover:bg-yellow-300 text-green-950 font-black text-xs px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-md transition shadow-sm active:scale-95 shrink-0"
               title="Store Owner Dashboard"
             >
               <span>⚙️ Admin</span>
@@ -260,6 +260,13 @@ export default function Navbar() {
           </Link>
 
           <div className="pt-2 border-t border-green-700 flex flex-col gap-2">
+            <Link
+              to="/admin"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 py-2 px-3 bg-yellow-400 text-green-950 font-black rounded-lg text-xs shadow-xs"
+            >
+              ⚙️ Admin Dashboard (Orders & Sales)
+            </Link>
             <Link
               to="/wishlist"
               onClick={() => setMobileMenuOpen(false)}
